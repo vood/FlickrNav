@@ -37,7 +37,7 @@
 
     NSError *error = nil;
     if (![self.listenSocket acceptOnPort:9999 error:&error]) {
-        NSLog(@"I goofed: %@", error);
+        [self alert:error];
     }
 
 
@@ -104,7 +104,7 @@
             [self.collectionView reloadData];
         });
     }                    errorBlock:^(RKObjectRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", [error localizedDescription]);
+        [self alert:error];
 
     }];
 }
@@ -125,7 +125,7 @@
             });
         }
     }                   errorBlock:^(RKObjectRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", [error localizedDescription]);
+        [self alert:error];
 
     }];
 }
@@ -141,6 +141,16 @@
     self.flickrClient.searchTerm = term;
     [self loadFirstPage];
     [sender readDataWithTimeout:-1 tag:0];
+}
+
+- (void)alert:(NSError *)error {
+    NSLog(@"Error: %@", [error localizedDescription]);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error occurred"
+                                                    message:[error localizedDescription]
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 
 
