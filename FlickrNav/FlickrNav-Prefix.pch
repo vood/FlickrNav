@@ -1,0 +1,18 @@
+//
+// Prefix header for all source files of the 'FlickrNav' target in the 'FlickrNav' project
+//
+#import <Availability.h>
+#if __IPHONE_6_0
+#import <SystemConfiguration/SystemConfiguration.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+#else
+  #import <SystemConfiguration/SystemConfiguration.h>
+  #import <CoreServices/CoreServices.h>
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+
+    #import <Foundation/Foundation.h>
+
+#endif
